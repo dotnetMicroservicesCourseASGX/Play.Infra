@@ -19,3 +19,8 @@ az group create --name $appname --location eastus
 ```powershell
 az cosmosdb create --name $appname --resource-group $appname --kind MongoDB --enable-free-tier
 ```
+
+## Create the Service Bus namespace
+```powershell
+az servicebus namespace create --resource-group $appname --name $appname --sku Standard
+```
