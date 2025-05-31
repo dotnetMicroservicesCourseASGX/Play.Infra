@@ -24,3 +24,8 @@ az cosmosdb create --name $appname --resource-group $appname --kind MongoDB --en
 ```powershell
 az servicebus namespace create --resource-group $appname --name $appname --sku Standard
 ```
+
+## Creating the Container Registry
+```powershell
+az acr create --resource-group $appname --name $appname --sku Basic
+```
