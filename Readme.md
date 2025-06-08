@@ -32,6 +32,13 @@ az acr create --resource-group $appname --name $appname --sku Basic
 
 ## Creating the AKS cluster
 ```powershell
+az provider register --namespace Microsoft.ContainerService
 az aks create -n $appname -g $appname --node-vm-size Standard_B2s --node-count 2 --attach-acr $appname --enable-oidc-issuer --enable-workload-identity --generate-ssh-keys 
-aks get-credentials -n $appname -g $appname
+az aks get-credentials -n $appname -g $appname
+```
+
+## Creating the Azure Key Vault
+```powershell
+az provider register --namespace Microsoft.KeyVault
+az keyvault create -n $appname -g $appname
 ```
