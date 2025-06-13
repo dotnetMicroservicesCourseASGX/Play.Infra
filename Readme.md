@@ -59,3 +59,17 @@ kubectl rollout status deployment/emissary-ingress -n $namespace -w
 kubectl -n emissary wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress
 
 ```
+
+## Configuring Emissary-ingress routing
+```powershell
+kubectl apply -f .\emissary-ingress\listener.yaml -n $namespace
+kubectl apply -f .\emissary-ingress\mappings.yaml -n $namespace
+```
+
+## Installing cert-manager
+```powershell
+helm repo add jetstack https://charts.jetstack.io --force-update
+
+helm install cert-manager jetstack/cert-manager --namespace $namespace --version v1.18.0 --set crds.enabled=true
+
+```
