@@ -15,7 +15,7 @@ kind: Mapping
 metadata:
   name: acme-challenge-mapping
 spec:
-  hostname: playeconomyaxsg.eastus.cloudapp.azure.com
+  hostname: playeconomyaxsg1.eastus.cloudapp.azure.com
   prefix: /.well-known/acme-challenge/
   rewrite: ""
   service: acme-challenge-service

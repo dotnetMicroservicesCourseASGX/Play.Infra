@@ -12,21 +12,26 @@ dotnet nuget add source --username USERNAME --password $gh_pat --store-password-
 
 ## Creating the Azure resource group
 ```powershell
-$appname="playeconomyaxsg"
+$appname="playeconomyaxsg1"
 az group create --name $appname --location eastus
 ```
 ## Create the cosmos Db account
 ```powershell
-az cosmosdb create --name $appname --resource-group $appname --kind MongoDB --enable-free-tier
+## que la ubicacion sea la misma que la del grupo de recursos
+az provider register --namespace Microsoft.DocumentDB
+az cosmosdb create --name $appname --resource-group $appname --kind MongoDB --enable-free-tier --location-region eastus
 ```
 
 ## Create the Service Bus namespace
 ```powershell
+az provider register --namespace Microsoft.DocumentDB
+
 az servicebus namespace create --resource-group $appname --name $appname --sku Standard
 ```
 
 ## Creating the Container Registry
 ```powershell
+az provider register --namespace Microsoft.ContainerRegistry
 az acr create --resource-group $appname --name $appname --sku Basic
 ```
 
@@ -35,6 +40,8 @@ az acr create --resource-group $appname --name $appname --sku Basic
 az provider register --namespace Microsoft.ContainerService
 az aks create -n $appname -g $appname --node-vm-size Standard_B2s --node-count 2 --attach-acr $appname --enable-oidc-issuer --enable-workload-identity --generate-ssh-keys 
 az aks get-credentials -n $appname -g $appname
+
+az aks scale --resource-group $appname --name $appname --node-count 4
 ```
 
 ## Creating the Azure Key Vault
@@ -69,7 +76,6 @@ kubectl apply -f .\emissary-ingress\mappings.yaml -n $namespace
 ## Installing cert-manager
 ```powershell
 helm repo add jetstack https://charts.jetstack.io --force-update
-
 helm install cert-manager jetstack/cert-manager --namespace $namespace --version v1.18.0 --set crds.enabled=true
 
 ```
