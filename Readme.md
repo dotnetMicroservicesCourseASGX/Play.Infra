@@ -19,7 +19,7 @@ az group create --name $appname --location eastus
 ```powershell
 ## que la ubicacion sea la misma que la del grupo de recursos
 az provider register --namespace Microsoft.DocumentDB
-az cosmosdb create --name $appname --resource-group $appname --kind MongoDB --enable-free-tier --location-region eastus
+az cosmosdb create --name $appname --resource-group $appname --kind MongoDB --enable-free-tier
 ```
 
 ## Create the Service Bus namespace

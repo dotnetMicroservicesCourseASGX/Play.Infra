@@ -1,10 +1,10 @@
 apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
-  name: playeconomyaxsg-host
+  name: playeconomyaxsg1-host
 spec:
   hostname: playeconomyaxsg1.eastus.cloudapp.azure.com
   acmeProvider:
     email: andres_s18@outlook.com
   tlsSecret:
-    name: playeconomyaxsg-tls
+    name: playeconomyaxsg1-tls
